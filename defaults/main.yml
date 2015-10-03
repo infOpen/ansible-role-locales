@@ -1,0 +1,18 @@
+---
+
+# Defaults file for locales
+
+locales_to_configure :
+  - "fr_FR.UTF-8 UTF-8"
+
+locales_default_lang : "fr_FR.UTF-8"
+
+locales_default_timezone : "Europe/Paris"
+
+locales_config_file_owner : "root"
+locales_config_file_group : "root"
+locales_config_file_mode  : "0644"
+
+locales_gen_file_owner : "root"
+locales_gen_file_group : "root"
+locales_gen_file_mode  : "0644"
