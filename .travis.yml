@@ -32,4 +32,5 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Check locales is accessible
+  - sudo locale | grep LANG= | cut -d '=' -f 2
   - test "fr_FR.UTF-8" == `sudo locale | grep LANG= | cut -d '=' -f 2`
