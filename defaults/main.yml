@@ -5,6 +5,8 @@
 
 # Packages management
 locales_packages: "{{ _locales_packages }}"
+locales_language_packs_packages: "{{ _locales_language_packs_packages | default([]) }}"
+locales_repositories_cache_valid_time: 3600
 
 # Files management
 locales_config_file_dest: "{{ _locales_config_file_dest }}"
@@ -19,6 +21,6 @@ locales_gen_file_mode: '0644'
 
 # Locales management
 locales_to_configure:
-  - 'fr_FR.UTF-8 UTF-8'
-locales_default_lang: 'fr_FR.UTF-8'
+  - 'en_US.UTF-8 UTF-8'
+locales_default_lang: 'en_US.UTF-8'
 locales_default_timezone: 'Europe/Paris'
