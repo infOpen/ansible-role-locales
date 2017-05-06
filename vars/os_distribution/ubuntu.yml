@@ -1,0 +1,8 @@
+---
+
+# Ubuntu OS variables
+#------------------------------------------------------------------------------
+
+_locales_packages:
+  - 'locales'
+  - 'language-pack-fr'

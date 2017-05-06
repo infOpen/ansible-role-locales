@@ -1,19 +1,25 @@
 ---
 
-# Tasks file for locales
+# Main tasks file for locales role
 
-- name: Load the OS specific varibles
-  include_vars: "{{ role_path }}/vars/{{ ansible_os_family }}.yml"
-
-
-- include: install_debian.yml
+- name: 'INIT | Manage variables to use for our target'
+  include: "{{ role_path }}/tasks/manage_variables.yml"
   tags:
-    - install
-    - locales
-  when: ansible_os_family == "Debian"
+    - 'role::locales'
+    - 'role::locales::init'
 
 
-- include: configure.yml
+- name: 'INSTALL | Manage installation tasks'
+  include: "{{ role_path }}/tasks/install/{{ ansible_os_family | lower }}_family.yml"
+  become: True
   tags:
-    - configure
-    - locales
+    - 'role::locales'
+    - 'role::locales::install'
+
+
+- name: 'CONFIG | Manage configuration tasks'
+  include: "{{ role_path }}/tasks/config.yml"
+  become: True
+  tags:
+    - 'role::locales'
+    - 'role::locales::config'
