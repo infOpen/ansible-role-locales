@@ -1,0 +1,20 @@
+---
+
+- name: 'INSTALL | APT | Install locales packages'
+  apt:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
+    update_cache: True
+    cache_valid_time: "{{ locales_repositories_cache_valid_time }}"
+  with_items: "{{ locales_packages }}"
+
+
+- name: 'INSTALL | APT | Install language packs packages'
+  apt:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
+    update_cache: True
+    cache_valid_time: "{{ locales_repositories_cache_valid_time }}"
+  register: 'locale_language_packs'
+  with_items: "{{ locales_language_packs_packages }}"
+  when: "(ansible_distribution | lower) == 'ubuntu'"

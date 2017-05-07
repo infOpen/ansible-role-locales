@@ -1,70 +1,125 @@
-locales
-=======
+# locales
 
 [![Build Status](https://travis-ci.org/infOpen/ansible-role-locales.svg?branch=master)](https://travis-ci.org/infOpen/ansible-role-locales)
 
 Install locales package.
 
-Requirements
-------------
+## Requirements
 
-This role requires Ansible 1.4 or higher, and platform requirements are listed
-in the metadata file.
+This role requires Ansible 2.0 or higher,
+and platform requirements are listed in the metadata file.
 
-Role Variables
---------------
+## Testing
 
-Default role variables
+This role use [Molecule](https://github.com/metacloud/molecule/) to run tests.
 
+Locally, you can run tests on Docker (default driver) or Vagrant.
+Travis run tests using Docker driver only.
 
-    locales_to_configure :
-      - "fr_FR.UTF-8 UTF-8"
+Currently, tests are done on:
+- Debian Jessie
+- Ubuntu Trusty
+- Ubuntu Xenial
 
-    locales_default_lang : "fr_FR.UTF-8"
+and use:
+- Ansible 2.0.x
+- Ansible 2.1.x
+- Ansible 2.2.x
+- Ansible 2.3.x
 
-    locales_default_timezone : "Europe/Paris"
+### Running tests
 
-    locales_config_file_owner : "root"
-    locales_config_file_group : "root"
-    locales_config_file_mode  : "0644"
+#### Using Docker driver
 
-    locales_gen_file_owner : "root"
-    locales_gen_file_group : "root"
-    locales_gen_file_mode  : "0644"
+```
+$ tox
+```
 
+#### Using Vagrant driver
 
-# Default Debian vars
+```
+$ MOLECULE_DRIVER=vagrant tox
+```
 
-    locales_packages :
-      - locales
-      - language-pack-fr
+## Role Variables
 
-    locales_config_file_dest : "/etc/default/locale"
-    locales_gen_file_dest    : "/etc/locale.gen"
+### Default role variables
 
+``` yaml
+# Packages management
+locales_packages: "{{ _locales_packages }}"
+locales_language_packs_packages: "{{ _locales_language_packs_packages | default([]) }}"
+locales_repositories_cache_valid_time: 3600
 
-    locales_update_command : "/usr/sbin/update-locale"
+# Files management
+locales_config_file_dest: "{{ _locales_config_file_dest }}"
+locales_gen_file_dest: "{{ _locales_gen_file_dest }}"
+locales_update_command: "{{ _locales_update_command }}"
+locales_config_file_owner: 'root'
+locales_config_file_group: 'root'
+locales_config_file_mode: '0644'
 
+# Locales management
+locales_to_configure:
+  - name: 'en_US.UTF-8'
+    modifier: 'UTF-8'
+locales_defaults:
+  LANG: 'en_US.UTF-8'
+  LANGUAGE: 'en_US.UTF-8'
+  LC_CTYPE: '"en_US.UTF-8"'
+  LC_NUMERIC: '"en_US.UTF-8"'
+  LC_TIME: '"en_US.UTF-8"'
+  LC_COLLATE: '"en_US.UTF-8"'
+  LC_MONETARY: '"en_US.UTF-8"'
+  LC_MESSAGES: '"en_US.UTF-8"'
+  LC_PAPER: '"en_US.UTF-8"'
+  LC_NAME: '"en_US.UTF-8"'
+  LC_ADDRESS: '"en_US.UTF-8"'
+  LC_TELEPHONE: '"en_US.UTF-8"'
+  LC_MEASUREMENT: '"en_US.UTF-8"'
+  LC_IDENTIFICATION: '"en_US.UTF-8"'
+  LC_ALL: 'en_US.UTF-8'
+```
 
-Dependencies
-------------
+### Debian family role variables
+
+``` yaml
+# Packages
+_locales_packages:
+  - name: 'locales'
+
+# Configuration files path
+_locales_config_file_dest: '/etc/default/locale'
+_locales_gen_file_dest: '/etc/locale.gen'
+
+# Locale update command
+_locales_update_command: '/usr/sbin/update-locale'
+```
+
+### Ubuntu OS role variables
+
+``` yaml
+locales_language_packs_packages:
+  - name: 'language-pack-en'
+```
+
+## Dependencies
 
 None
 
-Example Playbook
-----------------
+## Example Playbook
 
-    - hosts: servers
-      roles:
-        - { role: achaussier.locales }
+``` yaml
+- hosts: servers
+  roles:
+    - { role: infOpen.locales }
+```
 
-License
--------
+## License
 
 MIT
 
-Author Information
-------------------
+## Author Information
 
 Alexandre Chaussier (for Infopen company)
 - http://www.infopen.pro

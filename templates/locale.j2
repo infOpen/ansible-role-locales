@@ -1,3 +1,4 @@
 # {{ ansible_managed }}
-
-LANG={{ locales_default_lang }}
+{% for key, value in locales_defaults.iteritems() %}
+{{ key }}={{ value }}
+{% endfor %}
