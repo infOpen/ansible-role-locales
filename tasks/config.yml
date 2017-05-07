@@ -28,4 +28,4 @@
 
 - name: 'CONFIG | Update system settings'
   command: "{{ locales_update_command }}"
-  when: 'locale_generated.changed'
+  when: 'locale_generated.changed or (locale_language_packs.changed | default(False))'
