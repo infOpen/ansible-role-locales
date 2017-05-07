@@ -15,9 +15,6 @@ locales_update_command: "{{ _locales_update_command }}"
 locales_config_file_owner: 'root'
 locales_config_file_group: 'root'
 locales_config_file_mode: '0644'
-locales_gen_file_owner: 'root'
-locales_gen_file_group: 'root'
-locales_gen_file_mode: '0644'
 
 # Locales management
 locales_to_configure:
