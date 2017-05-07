@@ -36,4 +36,3 @@ locales_defaults:
   LC_MEASUREMENT: '"en_US.UTF-8"'
   LC_IDENTIFICATION: '"en_US.UTF-8"'
   LC_ALL: 'en_US.UTF-8'
-locales_default_timezone: 'Europe/Paris'
