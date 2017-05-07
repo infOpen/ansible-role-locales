@@ -21,7 +21,7 @@ def test_packages(host):
     elif host.system_info.distribution == 'ubuntu':
         packages = [
             'locales',
-            'language-pack-fr',
+            'language-pack-en',
         ]
 
     for package in packages:
