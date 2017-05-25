@@ -1,6 +1,10 @@
 # locales
 
-[![Build Status](https://travis-ci.org/infOpen/ansible-role-locales.svg?branch=master)](https://travis-ci.org/infOpen/ansible-role-locales)
+[![Build Status](https://img.shields.io/travis/infOpen/ansible-role-locales/master.svg?label=travis_master)](https://travis-ci.org/infOpen/ansible-role-locales)
+[![Build Status](https://img.shields.io/travis/infOpen/ansible-role-locales/develop.svg?label=travis_develop)](https://travis-ci.org/infOpen/ansible-role-locales)
+[![Updates](https://pyup.io/repos/github/infOpen/ansible-role-locales/shield.svg)](https://pyup.io/repos/github/infOpen/ansible-role-locales/)
+[![Python 3](https://pyup.io/repos/github/infOpen/ansible-role-locales/python-3-shield.svg)](https://pyup.io/repos/github/infOpen/ansible-role-locales/)
+[![Ansible Role](https://img.shields.io/ansible/role/17061.svg)](https://galaxy.ansible.com/infOpen/locales/)
 
 Install locales package.
 
