@@ -1,0 +1,18 @@
+---
+
+- name: 'INSTALL | YUM | Install locales packages'
+  become: True
+  yum:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
+  with_items: "{{ locales_packages }}"
+
+
+- name: 'INSTALL | YUM | Install language packs packages'
+  become: True
+  yum:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
+  notify: 'HANDLER | Update system settings'
+  with_items: "{{ locales_language_packs_packages }}"
+  when: "(ansible_distribution | lower) == 'centos'"

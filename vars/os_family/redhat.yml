@@ -1,15 +1,15 @@
 ---
 
-# Debian family variables
+# RedHat family variables
 # -----------------------------------------------------------------------------
 
 # Packages
 _locales_packages:
-  - name: 'locales'
+  - name: 'glibc-common'
 
 # Configuration files path
-_locales_config_file_dest: '/etc/default/locale'
+_locales_config_file_dest: '/etc/locale.conf'
 _locales_gen_file_dest: '/etc/locale.gen'
 
 # Locale update command
-_locales_update_command: '/usr/sbin/update-locale'
+_locales_update_command: "localectl set-locale LANG={{ locales_defaults.LANG }}"
