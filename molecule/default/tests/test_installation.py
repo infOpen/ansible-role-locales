@@ -12,6 +12,7 @@ testinfra_hosts = AnsibleRunner(
 
 
 @pytest.mark.parametrize('name,distribution', [
+    ('glibc-common', 'centos'),
     ('locales', 'debian'),
     ('locales', 'ubuntu'),
     ('language-pack-en', 'ubuntu'),

@@ -18,14 +18,23 @@
     mode: "{{ locales_config_file_mode }}"
 
 
-- name: 'CONFIG | Generate locales'
+- name: 'CONFIG | Generate locales on Debian family'
   locale_gen:
     name: "{{ item.name }}"
     state: "{{ item.state | default('present') }}"
-  register: 'locale_generated'
+  notify: 'HANDLER | Update system settings'
+  when: (ansible_os_family | lower) != 'redhat'
   with_items: "{{ locales_to_configure }}"
 
 
-- name: 'CONFIG | Update system settings'
-  command: "{{ locales_update_command }}"
-  when: 'locale_generated.changed or (locale_language_packs.changed | default(False))'
+- name: 'CONFIG | Generate locales on RedHat family'
+  command: >
+    localedef
+    -c
+    -f {{ item.name.split('.')[1] }}
+    -i {{ item.name.split('.')[0] }}
+    {{ item.name }}
+  changed_when: False
+  notify: 'HANDLER | Update system settings'
+  when: (ansible_os_family | lower) == 'redhat'
+  with_items: "{{ locales_to_configure }}"
